@@ -9,6 +9,7 @@ Datasets
 Weights
 .ipynb_checkpoints
 */.ipynb_checkpoints/*
+.csv
 
 # IPython
 profile_default/
