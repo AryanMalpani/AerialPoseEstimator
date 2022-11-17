@@ -1,13 +1,13 @@
 import cv2
 import numpy as np
 import os
-
-def gammaCorrection(src, filename):
+import sys
+def gammaCorrection(src, filename,gamma):
     path = "/home/aryna/Documents/Sem 5/CV/CrossLoc/datasets/naturescape/test_drone_real/rgb/"
 #     direc = str(filename)+"/"
 #     path = os.path.join(parent, direc) 
 #     os.mkdir(path)
-    gammaMatrix = [1]
+    gammaMatrix = [gamma]
     for gamma in gammaMatrix:
         invGamma = 1 / gamma
 
@@ -17,12 +17,11 @@ def gammaCorrection(src, filename):
         cv2.imwrite(file, cv2.LUT(src, table))
 
 folder = "/home/aryna/Documents/Sem 5/CV/CrossLoc/datasets/naturescape/test_drone_real/rgb_og/"
-# count = 0
 
+gamma=int(sys.argv[1])/10
+print(gamma)
 for filename in os.listdir(folder):
-    # count += 1
     temp = os.path.join(folder,filename)
     if(temp.endswith('png')):
         img = cv2.imread(temp)
-        gammaCorrection(img, filename)
-    # print(count)
+        gammaCorrection(img, filename,gamma)
