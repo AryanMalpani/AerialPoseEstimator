@@ -1,0 +1,1 @@
+{"test_loss": 100116.13625000001, "test BCE Loss": 958211.95, "test KLD Loss": 42949.41450195313, "_timestamp": 1669111874.6783702, "_runtime": 9.49791932106018, "_step": 0, "_wandb": {"runtime": 41}}
