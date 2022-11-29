@@ -1,0 +1,49 @@
+{
+    "os": "Windows-10-10.0.19044-SP0",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-11-22T09:54:47.430523",
+    "startedAt": "2022-11-22T09:54:46.161169",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "declouding.ipynb",
+    "root": "D:/Parth/AerialPoseEstimator",
+    "git": {
+        "remote": "https://github.com/AryanMalpani/AerialPoseEstimator.git",
+        "commit": "31940999bfd136614152924270bc75b15e471293"
+    },
+    "email": "tulsyan.parth0206@gmail.com",
+    "host": "Frac36",
+    "username": "Frac36",
+    "executable": "D:\\Parth\\Ana\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3593.0,
+        "min": 0.0,
+        "max": 3593.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3593.0,
+            "min": 0.0,
+            "max": 3593.0
+        }
+    ],
+    "disk": {
+        "total": 214.18358993530273,
+        "used": 150.75257873535156
+    },
+    "gpu": "NVIDIA GeForce RTX 2060 SUPER",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 2060 SUPER",
+            "memory_total": 8589934592
+        }
+    ],
+    "memory": {
+        "total": 15.950599670410156
+    }
+}
