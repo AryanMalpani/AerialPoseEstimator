@@ -1,0 +1,1 @@
+{"test_loss": 296.352910625, "test BCE Loss": 296327.0508125, "test KLD Loss": 25.859036581873895, "_timestamp": 1670534684.5100622, "_runtime": 145.431743144989, "_step": 2, "train_loss": 301372.46875, "train BCE Loss": 301371.005109375, "train KLD Loss": 1.48268461227417}

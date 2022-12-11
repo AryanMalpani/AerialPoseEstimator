@@ -1,0 +1,1 @@
+{"test_loss": NaN, "test BCE Loss": 21111.680609375, "test KLD Loss": NaN, "_timestamp": 1670535257.3697164, "_runtime": 302.3722093105316, "_step": 6, "train_loss": NaN, "train BCE Loss": 24574.898515625, "train KLD Loss": NaN, "_wandb": {"runtime": 330}}

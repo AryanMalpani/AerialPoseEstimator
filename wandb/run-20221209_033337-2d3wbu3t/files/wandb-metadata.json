@@ -1,0 +1,124 @@
+{
+    "os": "Linux-5.15.0-56-generic-x86_64-with-glibc2.35",
+    "python": "3.9.13",
+    "heartbeatAt": "2022-12-08T22:03:38.642696",
+    "startedAt": "2022-12-08T22:03:37.344075",
+    "docker": null,
+    "cuda": null,
+    "args": null,
+    "state": "running",
+    "program": "declouding.ipynb",
+    "root": "/home/aryna/Documents/Sem_5/CV/AerialPoseEstimator",
+    "git": {
+        "remote": "https://github.com/AryanMalpani/AerialPoseEstimator.git",
+        "commit": "34d6a5ea58a520d1bb9efbf7bf3b3f81048a6cf0"
+    },
+    "email": "aryanmalpani02@gmail.com",
+    "host": "aryan",
+    "username": "aryna",
+    "executable": "/home/aryna/anaconda3/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 1.7989999999999995,
+        "min": 1400.0,
+        "max": 2900.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 2.9,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 2.9,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 2.984,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.7,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 2.9,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        },
+        {
+            "current": 1.4,
+            "min": 1400.0,
+            "max": 2900.0
+        }
+    ],
+    "disk": {
+        "total": 271.92484283447266,
+        "used": 188.6580924987793
+    },
+    "gpu": "NVIDIA GeForce GTX 1660 Ti with Max-Q Design",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1660 Ti with Max-Q Design",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 15.051013946533203
+    }
+}
