@@ -415,8 +415,8 @@ class MyDataset(Dataset):
     def __getitem__(self, index):
 #         print(self.df.iloc[index, 1])
 #         print(self.df.iloc[index, 0])
-        x = np.array(Image.open(self.df.iloc[index, 1]))[:,:,:3]
-        y = np.array(Image.open(self.df.iloc[index, 0]))[:,:,:3]
+        x = np.array(Image.open(self.df.iloc[index, 1]).convert("RGB"))
+        y = np.array(Image.open(self.df.iloc[index, 0]).convert("RGB"))
         if self.transform_x is not None:
             x=self.transform_x(x)
             y=self.transform_y(y)
