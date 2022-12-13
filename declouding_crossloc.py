@@ -565,7 +565,7 @@ for epoch in tqdm(range(0, epochs + 1)):
             x = x.to(device)
             y = y.to(device)
             x=x.view(-1,3,480,720)             
-            y=y.view(-1,4,480,720)
+            y=y.view(-1,3,480,720)
             x=torch.div(x,255)
             y=torch.div(y,255)
             y_bar=model(x)
@@ -595,7 +595,7 @@ for epoch in tqdm(range(0, epochs + 1)):
             x = x.to(device)
             y = y.to(device)
             x=x.view(-1,3,480,720)
-            y=y.view(-1,4,480,720)
+            y=y.view(-1,3,480,720)
             x=torch.div(x,255)
             y=torch.div(y,255)
             # ===================forward=====================
