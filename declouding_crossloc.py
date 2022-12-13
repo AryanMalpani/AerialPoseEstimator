@@ -187,8 +187,8 @@ class Decoder(nn.Module):
         if full_size_output:
             # upsampling for semantics task
             self.duc_upsample = DenseUpsamplingConvolution(down_sampling_rate=8, in_channel=(512, 128)[tiny],
-                                                           num_classes=4)
-            self.fc3 = nn.Conv2d(4, 4, 1, 1, 0)
+                                                           num_classes=3)
+            self.fc3 = nn.Conv2d(3, 3, 1, 1, 0)
         else:
             self.fc3 = nn.Conv2d((512, 128)[tiny], 4, 1, 1, 0)
 
@@ -415,8 +415,8 @@ class MyDataset(Dataset):
     def __getitem__(self, index):
 #         print(self.df.iloc[index, 1])
 #         print(self.df.iloc[index, 0])
-        x = Image.open(self.df.iloc[index, 1])
-        y = Image.open(self.df.iloc[index, 0])
+        x = np.array(Image.open(self.df.iloc[index, 1]))[:,:,:3]
+        y = np.array(Image.open(self.df.iloc[index, 0]))[:,:,:3]
         if self.transform_x is not None:
             x=self.transform_x(x)
             y=self.transform_y(y)
@@ -439,8 +439,8 @@ class MyDataset_np(Dataset):
     def __getitem__(self, index):
 #         print(self.df.iloc[index, 1])
 #         print(self.df.iloc[index, 0])
-        x = np.array(Image.open(self.df.iloc[index, 1]))
-        y = np.array(Image.open(self.df.iloc[index, 0]))
+        x = np.array(Image.open(self.df.iloc[index, 1]))[:,:,:3]
+        y = np.array(Image.open(self.df.iloc[index, 0]))[:,:,:3]
         if self.transform_x is not None:
             x=self.transform_x(x)
             y=self.transform_y(y)
@@ -449,7 +449,7 @@ class MyDataset_np(Dataset):
         return x, y
     def __len__(self):
 #         return len(self.df)
-        return 10
+        return 3000
 
 
 # In[17]:
@@ -478,10 +478,10 @@ wandb.init(project="AerialPoseEstimator")
 # In[20]:
 
 
-train_loader=MyDataset_np("./dataset_train.csv")
-test_loader=MyDataset_np("./dataset_test.csv")
-train_loader=DataLoader(train_loader, batch_size=batch_size,shuffle=True)
-test_loader=DataLoader(test_loader, batch_size=batch_size,shuffle=True)
+# train_loader=MyDataset("./dataset_train.csv")
+# test_loader=MyDataset("./dataset_test.csv")
+# train_loader=DataLoader(train_loader, batch_size=batch_size,shuffle=True)
+# test_loader=DataLoader(test_loader, batch_size=batch_size,shuffle=True)
 
 
 # In[21]:
@@ -539,8 +539,8 @@ def batch_mean_y(loader):
 # In[24]:
 
 
-mean_x,std_x=batch_mean_x(train_loader)
-mean_y,std_y=batch_mean_y(train_loader)
+# mean_x,std_x=batch_mean_x(train_loader)
+# mean_y,std_y=batch_mean_y(train_loader)
 
 
 # In[25]:
@@ -550,34 +550,6 @@ train_loader=MyDataset("./dataset_train.csv")
 test_loader=MyDataset("./dataset_test.csv")
 train_loader=DataLoader(train_loader, batch_size=batch_size,shuffle=True)
 test_loader=DataLoader(test_loader, batch_size=batch_size,shuffle=True)
-
-
-# In[26]:
-
-
-transform_img_normal_x = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize(mean = mean_x,std= std_x)
-])
-transform_img_normal_y = transforms.Compose([
-    transforms.ToTensor(),
-    transforms.Normalize(mean = 0,std = 1)
-])
-train_loader=MyDataset("./dataset_train.csv",
-                       transform_x=transform_img_normal_x,
-                       transform_y=transform_img_normal_y)
-test_loader=MyDataset("./dataset_test.csv",
-                      transform_x=transform_img_normal_x,
-                      transform_y=transform_img_normal_y)
-train_loader=DataLoader(train_loader, batch_size=batch_size,shuffle=True)
-test_loader=DataLoader(test_loader, batch_size=batch_size,shuffle=True)
-
-
-# In[ ]:
-
-
-
-
 
 # In[27]:
 
