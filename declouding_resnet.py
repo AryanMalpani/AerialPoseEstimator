@@ -1,4 +1,4 @@
-ga#!/usr/bin/env python
+#!/usr/bin/env python
 # coding: utf-8
  
 # In[1]:
@@ -6,33 +6,39 @@ import torchvision
 import torch.nn as nn
 from torch.utils.data import DataLoader,Dataset
 from torchvision import transforms
-from torchvision.datasets import FashionMNIST,StanfordCars
 from matplotlib import pyplot as plt
 import numpy as np
 import torch.nn.functional as F
 import math
-import pandas as pd
 from PIL import Image
 from tqdm import tqdm
 import os
 import cv2
+import pandas as pd
 import wandb
 import torch
-wandb.init()
 from PIL import ImageFile
 import res_encoder as enc
-import res_decoder as enc
+import res_decoder as dec
  
 latent_size=256
  
 class Net(nn.Module):
 	def __init__(self):
-		super(Net,self)
+		super(Net,self).__init__()
 		self.enc=enc.ResNet(enc.Bottleneck,[3,6,4,3])
 		self.mlp=nn.Linear(2048,latent_size)
 		self.mlp2=nn.Linear(latent_size,2048)
-		self.dec=dec.
- 
+		self.dec=dec.ResNet(dec.Bottleneck,[3,6,4,3])
+	def forward(self,x):
+		x=self.enc(x)[0]
+		x=x.view((-1,2048))
+		x=self.mlp(x)
+		x=self.mlp2(x)
+		x=x.view(-1,2048,1,1)
+		x=self.dec(x)
+		return x
+model=Net()
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 print(device)
@@ -89,25 +95,26 @@ usecols=['input', 'output'])
 		return 3000
 epochs = 30
 batch_size = 4
-wandb.config = {
-  "learning_rate": learning_rate,
-  "epochs": epochs,
-  "batch_size": batch_size,
-}
-wandb.init(project="AerialPoseEstimator")
-wandb.watch(model)
+# wandb.config = {
+#   "learning_rate": learning_rate,
+#   "epochs": epochs,
+#   "batch_size": batch_size,
+# }
+# wandb.init(project="AerialPoseEstimator")
+# wandb.watch(model)
 train_loader=MyDataset("./dataset_train2.csv")
 test_loader=MyDataset("./dataset_test.csv")
 train_loader=DataLoader(train_loader, batch_size=batch_size,shuffle=False)
 test_loader=DataLoader(test_loader, batch_size=batch_size,shuffle=False)
  
-path="./Weights/crossloc.pt"
-isExist = os.path.exists(path)
-if isExist:
-	checkpoint=torch.load("./Weights/crossloc.pt")
-	model.load_state_dict(checkpoint["model_state_dict"])
-	optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
+# path="./Weights/resnet.pt"
+# isExist = os.path.exists(path)
+# if isExist:
+# 	checkpoint=torch.load("./Weights/crossloc.pt")
+# 	model.load_state_dict(checkpoint["model_state_dict"])
+# 	optimizer.load_state_dict(checkpoint["optimizer_state_dict"])
 # Training and testing the VAE
+model=model.to(device)
 codes = dict(μ=list(), logσ2=list(), x=list())
 T=transforms.ToPILImage()
 for epoch in tqdm(range(0, epochs + 1)):
@@ -130,8 +137,8 @@ for epoch in tqdm(range(0, epochs + 1)):
 			loss.backward()
 			optimizer.step()
 		print(train_loss)
-		wandb.log({"train_loss":train_loss 
-/len(train_loader.dataset)})
+# 		wandb.log({"train_loss":train_loss 
+# /len(train_loader.dataset)})
 		means, logvars, labels = list(), list(), list()
 		if epoch%2==0:
 			torch.save({'epoch': epoch,
@@ -173,15 +180,13 @@ optimizer.state_dict(),
 				# cv2.imshow("hello",image_y)
 				# cv2.imshow("hello",image_x)
 				
-print(image_y.cpu().detach().numpy().shape)
-				image_y = 
-Image.fromarray(image_y.cpu().detach().numpy().astype(np.uint8))
+				print(image_y.cpu().detach().numpy().shape)
+				image_y = Image.fromarray(image_y.cpu().detach().numpy().astype(np.uint8))
 				image_y = image_y.convert('RGB')
 				xname=xname[0]
 				xname=xname.split("/")
 				image_y.save("./outputs/"+xname[-1])
-				image_x = 
-Image.fromarray(image_x.cpu().detach().numpy().astype(np.uint8))
+				image_x = Image.fromarray(image_x.cpu().detach().numpy().astype(np.uint8))
 				image_x=image_x.convert("RGB")
 				yname=yname[0]
 				yname=yname.split("/")
@@ -191,68 +196,9 @@ Image.fromarray(image_x.cpu().detach().numpy().astype(np.uint8))
 			counter=counter+1
 	test_loss /= len(test_loader.dataset)
 	print(test_loss)
-	wandb.log({"test_loss":test_loss /len(test_loader.dataset)})
+	# wandb.log({"test_loss":test_loss /len(test_loader.dataset)})
 	print(epoch)
- 
- 
-# In[ ]:
- 
- 
- 
- 
- 
-# In[ ]:
- 
- 
-# test_loader=MyDataset("./dataset_test.csv")
- 
- 
-# In[ ]:
- 
- 
-# temp 
-=np.array(Image.open("./Datasets/Input/Echendens-LHS_09620.png_6.png"), 
-dtype = float)/255.0
- 
- 
-# In[ ]:
- 
- 
-# tem = torch.from_numpy(temp).view(-1,3,480,720)
- 
- 
-# In[ ]:
- 
- 
-# tem=tem.to(device,dtype=torch.float32)
- 
- 
-# In[ ]:
- 
- 
-# ans=(model(tem))
- 
- 
-# In[ ]:
- 
- 
-# ans=(ans[0]*255).detach().cpu().numpy()
- 
- 
-# In[ ]:
- 
- 
-# ans.shape
- 
- 
-# In[ ]:
- 
- 
-# img=Image.frtomarray(ans)
- 
- 
-# In[ ]:
- 
- 
+
+
  
  
